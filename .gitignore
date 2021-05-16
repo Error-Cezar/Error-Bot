@@ -2,4 +2,5 @@
 /node_modules
 .env
 packtage-lock.json
-/db
+db/bot/enmap.sqlite-shm
+db/bot/enmap.sqlite-wal
