@@ -121,6 +121,19 @@ process.on('unhandledRejection', error => {
 	console.error('Unhandled promise rejection:', error);
 });
 
+// client.on('guildCreate', guild => {
+//    let defaultChannel = "";
+//     guild.channels.cache.forEach((channel) => {
+//       if(channel.type == "text" && defaultChannel == "") {
+//        if(channel.permissionsFor(guild.me).has("SEND_MESSAGES")) {
+//           defaultChannel = channel;
+//       }
+//     }
+
+//    return client.sendEmbed(defaultChannel, "New bot incoming !", `yoo thanks for adding **Error-bot** here \n type &help for the commands and stuff`, "", "", "RANDOM")
+// })
+// });
+
 
 
     try {

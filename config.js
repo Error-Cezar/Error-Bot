@@ -3,9 +3,9 @@ let embed = {
 	footer: "Error-Bot | by Error-Cezar",
 }
 
-let author = "Error-Cezar"
+let owners = "Error-Cezar"
 
 module.exports = {
 	embed,
-	author
+	owners
 }

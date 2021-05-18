@@ -27,3 +27,4 @@ module.exports = {
             await message.channel.send(evaled, { split: true, code: "js" });
 
     }};
+    
