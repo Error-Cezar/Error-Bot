@@ -1,5 +1,5 @@
 const fs = require("fs");
-const Discord = require("Discord.js");
+const Discord = require("discord.js");
 module.exports = {
     name: 'reload',
     description: 'Reloads a command',

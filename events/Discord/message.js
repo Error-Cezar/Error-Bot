@@ -2,6 +2,11 @@ const Discord = require('discord.js');
 const fs = require("fs")
 const cooldowns = new Discord.Collection();
 module.exports = async (client, message) => {
+	//Returns nothing if there is no command
+	if (!command) return;
+	if (command.name && message.channel.type !== 'text') {
+		return
+	}
 	const defaultSettings = {
     prefix: "&",
     modLogChannel: "mod-log",
@@ -12,21 +17,17 @@ module.exports = async (client, message) => {
   }
 const guildConf = client.settings.ensure(message.guild.id, defaultSettings);
 const prefix = guildConf.prefix;
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
-	if(message.content === prefix) return
+const escapeRegex = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+	const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(prefix)})\\s*`);
+	if (!prefixRegex.test(message.content)) return;
 
-	const args = message.content.slice(prefix.length).split(/ +/);
+	const [, matchedPrefix] = message.content.match(prefixRegex);
+	const args = message.content.slice(matchedPrefix.length).trim().split(/ +/);
 	const commandName = args.shift().toLowerCase();
 
 	const command = client.commands.get(commandName)
 		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 		
-//Returns nothing if there is no command
-	if (!command) return;
-
-	if (command.name && message.channel.type !== 'text') {
-		return
-	}
 	
 
 	if (command.args && !args.length) {

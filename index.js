@@ -1,4 +1,3 @@
-console.clear();
 const Discord = require('discord.js');
 require('dotenv').config();
 const Enmap = require('enmap');
@@ -31,6 +30,7 @@ const defaultSettings = {
 
   client.on("ready", message => {
     console.log('bot ready !');
+    client.user.setActivity('&help | im pro', { type: 'WATCHING' });
 });
 
 // Gets all directories in the main folder - Only goes 1 down cannot find subfolders of subfolders
@@ -98,7 +98,7 @@ fs.readdir(`${process.cwd()}/events/Discord/`, (err, files) => {
         delete require.cache[require.resolve(`${process.cwd()}/events/Discord/${file}`)];
     }
 });
-// This executes when a member joins, so let's welcome them!
+// This executes when a member joins.
 client.on("guildMemberAdd", member => {
 
   // First, ensure the settings exist

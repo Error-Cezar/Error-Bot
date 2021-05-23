@@ -38,7 +38,7 @@ const guildConf = client.settings.ensure(message.guild.id, defaultSettings);
       return message.reply(`Look like this key is not in the configuration.\n here is the current keys: \`\`\`${configProps.join("\n")}\`\`\``);
     }
 
-    // Now we can finally change the value. Here we only have strings for values 
+      // Now we can finally change the value. Here we only have strings for values 
     // so we won't bother trying to make sure it's the right type and such. 
     client.settings.set(message.guild.id, value.join(" "), prop);
 

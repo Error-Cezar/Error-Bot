@@ -1,0 +1,21 @@
+{
+  "name": "error-bot",
+  "version": "1.0.0",
+  "description": "h",
+  "main": "index.js",
+  "dependencies": {
+    "canvacord": "^5.2.0",
+    "discord.js": "^12.5.3",
+    "dotenv": "^8.2.0",
+    "enmap": "^5.8.4",
+    "moment": "^2.29.1",
+    "xvdl": "^1.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ."
+  },
+  "author": "Error-Cezar",
+  "license": "ISC"
+}

@@ -12,7 +12,7 @@ module.exports = {
 
             
                 if(cmd) {
-                await client.sendEmbed(message.channel, "**help**", `Name: ${cmd.name} \n Description: ${cmd.description}, \nCooldown: ${cmd.cooldown ? cmd.cooldown + " Seconds" : "None"} \n Cooldown: ${cmd.usage ? cmd.usage : "None"}`)
+                await client.sendEmbed(message.channel, "**help**", `Name: ${cmd.name} \n Aliases: ${cmd.aliases ? cmd.aliases : "None"} \n Description: ${cmd.description}, \nCooldown: ${cmd.cooldown ? cmd.cooldown + " Seconds" : "None"} \n Usage: ${cmd.usage ? cmd.usage : "None"}`)
                 return;
             } else {
                 await client.sendErrorEmbed(message.channel, "That is not a valid command or alias")
@@ -25,8 +25,10 @@ module.exports = {
             em.setDescription('here is a list of all my cmds')
             fs.readdirSync(`${process.cwd()}/commands`).forEach(f => {
                 const files = fs.readdirSync(`${process.cwd()}/commands/${f}`);
-                console.log(files)
-                    em.addField(f, files.join(", "), false)
+                const rfiles = files.map(x => {
+                    return x.replace('.js','');
+                  })
+                                      em.addField(f, rfiles.join(", "), false)
             })
             em.setFooter("Error-Bot | by Error-Cezar")
             em.setColor("RANDOM")
