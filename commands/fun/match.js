@@ -1,10 +1,13 @@
+
+
 module.exports = {
     name: "match",
-    description: "play againist a user or a bot (me in a 1V1 fight) !",
+    description: "wip",
     cooldown: 60,
     usage: "[user mention]",
     async execute(message, args) {
         const client = message.client
+        if(client) return client.sendErrorEmbed(message.channel, "this command is still in progress")
         var bot = 1
         var go = 0
         if(args[0]){const user = message.mentions.users.first()

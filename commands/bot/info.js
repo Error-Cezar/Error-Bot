@@ -1,9 +1,13 @@
+const { loc } = require(`${process.cwd()}/events/Discord/message.js`);
+console.log(loc)
+const { description } = ""
+
 module.exports = {
     name: "info",
-    description: "get the bot's info",
+    description: "get bot info",
     execute(message) {
+        const client = message.client;
         const guild = message.guild
-        const client = message.client
         const { MessageEmbed }= require("discord.js")
         const hou = (client.uptime/3,6e+6)
 const inf = new MessageEmbed()

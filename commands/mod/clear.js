@@ -9,9 +9,9 @@ const num = args[0];
 if(!num) return client.sendErrorEmbed(message.channel, "you need to put a number or something like that.")
 message.delete();
 if(isNaN(num)) return client.sendErrorEmbed(message.channel, "this value isn't a valid number !")
-
+if(num > 100) return client.sendErrorEmbed(message.channel, "the number cant be above 100 !")
 message.channel.bulkDelete(num).then(() => {
-    client.sendEmbed(message.channel, "Message Deleted",`I have deleted Deleted ${num} messages !`, "", `deleted by ${message.author.username}`)}) 
+   client.sendEmbed(message.channel, "Message Deleted",`I have deleted Deleted ${num} messages !`, "", `deleted by ${message.author.username}`)})
     .catch(err => {
         // An error happened
         client.sendErrorEmbed(message.channel, err)

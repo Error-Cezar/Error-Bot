@@ -1,14 +1,56 @@
 module.exports = {
     name: "xvideo",
     aliases: "xvid",
-    description: "what is this",
+    description: "send a video from xvideo.com",
     cooldown: 5,
     async execute(message, args) {
         const client = message.client
-        if(!message.channel.nsfw) return client.sendErrorEmbed(message.channel, "this channel isn't nsfw !")
-        const { XVDL } = require("xvdl");
-        const url = args[0]
+        if (!message.channel.nsfw) return client.sendErrorEmbed(message.channel, "this channel isn't nsfw !")
+        const {
+            XVDL
+        } = require("xvdl");
+        const vid = args[0]
+        const num = args.slice(vid.length)
+        console
 
-       message.channel.send("sorry, the command you are trying the execute can not be use because of a bug in the xvideo package \n this command will be avaible when the bug will be fixed. \n in short no nsfw for you")
+        XVDL.search(vid)
+            .then(info => {
+                var min = 0;
+                var max = Math.floor(info.videos.length);
+                var infoo = info.videos[Math.floor(Math.random() * (max - min)) + min]
+                console.log(infoo.url)
+                var infos = infoo.url
+                // console.log(infoo.url)
+                XVDL.getInfo(infos)
+                    .then(inf => {
+                        console.log(inf)
+                        var woo = inf.streams
+                        const Discord = require('discord.js');
+
+                        // inside a command, event listener, etc.
+                        const exampleEmbed = new Discord.MessageEmbed()
+                            .setColor('RANDOM')
+                            .setTitle("video info")
+                            .addFields({
+                                name: 'likes',
+                                value: inf.ratings.likes,
+                                inline: true
+                            }, {
+                                name: 'dislikes',
+                                value: inf.ratings.dislikes,
+                                inline: true
+                            }, {
+                                name: 'comments',
+                                value: inf.comments,
+                                inline: false
+                            })
+                            .setFooter("https://xvideos.com | " + inf.url);
+
+                        message.channel.send(exampleEmbed)
+                        message.channel.send(woo.hq)
+                    })
+            })
+            .catch(e => console.error(e));
+
     }
 }

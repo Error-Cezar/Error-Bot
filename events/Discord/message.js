@@ -3,10 +3,6 @@ const fs = require("fs")
 const cooldowns = new Discord.Collection();
 module.exports = async (client, message) => {
 	//Returns nothing if there is no command
-	if (!command) return;
-	if (command.name && message.channel.type !== 'text') {
-		return
-	}
 	const defaultSettings = {
     prefix: "&",
     modLogChannel: "mod-log",
@@ -15,6 +11,7 @@ module.exports = async (client, message) => {
     welcomeChannel: "welcome",
     welcomeMessage: "Say hello to {{user}}, everyone!"
   }
+  if(message.channel.type !== 'text') return
 const guildConf = client.settings.ensure(message.guild.id, defaultSettings);
 const prefix = guildConf.prefix;
 const escapeRegex = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -24,10 +21,13 @@ const escapeRegex = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 	const [, matchedPrefix] = message.content.match(prefixRegex);
 	const args = message.content.slice(matchedPrefix.length).trim().split(/ +/);
 	const commandName = args.shift().toLowerCase();
-
+	if(!commandName) return
 	const command = client.commands.get(commandName)
 		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
-		
+		if (!command) return;
+		if (command.name && message.channel.type !== 'text') {
+			return
+		}
 	
 
 	if (command.args && !args.length) {
@@ -59,7 +59,14 @@ const escapeRegex = str => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 	timestamps.set(message.author.id, now);
 	setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
-
+var loc = "";
+	client.slang = client.settings.get(message.guild.id, "language");
+	if(client.slang == "en") {
+		exports.loc = `${process.cwd()}/locales/en.json`
+	}
+	if(client.slang == "fr") {
+		exports.loc = `${process.cwd()}/locales/fr.json`
+	}
 	try {
 		command.execute(message, args, client);
 	} catch (error) {

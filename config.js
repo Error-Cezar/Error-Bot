@@ -5,7 +5,14 @@ let embed = {
 
 let owners = "Error-Cezar"
 
+let lang = {
+  fr: "french",
+  en: "english",
+  de: "deutsch"
+}
+
 module.exports = {
 	embed,
-	owners
+	owners,
+	lang
 }

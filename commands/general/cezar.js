@@ -1,6 +1,6 @@
 module.exports = {
     name: "cezar",
-    description: "what is this",
+    description: "cezar",
     execute(message) {
         message.channel.send('Credits To Cezar Andrade')
     }

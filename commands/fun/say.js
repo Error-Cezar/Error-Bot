@@ -1,6 +1,8 @@
+
+
 module.exports = {
 	name: "say",
-	description: "say command cuz it's cool and why not",
+	description: "make me talk",
 	cooldown: 6,
 	execute(message){
 		const Discord = require("discord.js")

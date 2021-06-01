@@ -6,6 +6,7 @@ module.exports = {
         message.client.settings.get(message.guild.id);
 		const defaultSettings = {
     prefix: "&",
+    language: "en",
     modLogChannel: "mod-log",
     modRole: "Moderator",
     adminRole: "Administrator",
@@ -38,6 +39,11 @@ const guildConf = client.settings.ensure(message.guild.id, defaultSettings);
       return message.reply(`Look like this key is not in the configuration.\n here is the current keys: \`\`\`${configProps.join("\n")}\`\`\``);
     }
 
+    if(prop == "language") {
+if(!client.lang.includes(value.join(" "))) {
+ return message.reply(`This language doesnt exist.\n here is the current languages: \`\`\`${client.lang.join(", ")}\`\`\``)
+}
+    }
       // Now we can finally change the value. Here we only have strings for values 
     // so we won't bother trying to make sure it's the right type and such. 
     client.settings.set(message.guild.id, value.join(" "), prop);

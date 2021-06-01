@@ -1,8 +1,10 @@
+
+
 module.exports = {
     name: "ping",
-    description: "get the bot pinging time",
+    description: "pong !",
     async execute(message) {
-        const client = message.client
+        const client = message.client;
     message.channel.send("Pinging...").then((msg) => {
 
     const apiPing = Math.round(client.ws.ping)
