@@ -4,4 +4,5 @@
 packtage-lock.json
 db/bot/enmap.sqlite-shm
 db/bot/enmap.sqlite-wal
-.vscode/sftp.json
+/.vscode
+Panel API.txt

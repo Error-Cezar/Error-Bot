@@ -1,12 +1,13 @@
 const scdl = require("soundcloud-downloader").default;
 const { canModifyQueue } = require(`${process.cwd()}/util/SoundCloudUtil`);
-
+const ytdl = require("ytdl-core")
 module.exports = {
   async play(song, message) {
     const queue = message.client.queue.get(message.guild.id);
      let collector = null;
 if(!song) {
     queue.channel.leave();
+    message.client.clink.delete(message.guild.id);
     message.client.queue.delete(message.guild.id);
     return queue.textChannel.send("🚫 queue ended ! leaving the voice chat.").catch(console.error);
   }
@@ -34,6 +35,7 @@ if(!song) {
           streamType = "unknown";
         }
       }
+
     } catch (error) {
       if (queue) {
         queue.songs.shift();
@@ -45,7 +47,7 @@ if(!song) {
       return message.channel.send(`Error: ${error.message ? error.message : error}`);
     }
 
-    queue.connection.on("disconnect", () => message.client.queue.delete(message.guild.id));
+    queue.connection.on("disconnect", () =>  message.client.queue.delete(message.guild.id)); message.client.clink.delete(message.guild.id);
 
     const dispatcher = queue.connection
       .play(stream, { type: streamType })

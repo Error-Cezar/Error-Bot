@@ -18,6 +18,10 @@
     "string-progressbar": "^1.0.3",
     "debug": "^4.3.1",
     "soundcloud-downloader": "^1.0.0",
+    "discord-buttons": "^3.0.1",
+    "mongoose": "^5.12.13",
+    "ytdl-core": "^4.8.2",
+    "discord-ytdl-core": "^5.0.3",
     "soundcloud.ts": "^0.4.0"
   },
   "devDependencies": {},

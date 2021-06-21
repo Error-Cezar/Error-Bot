@@ -14,10 +14,19 @@ module.exports = (client, guildConf, message) => {
         }
         return;
     }
-	
+    
+    client.mcheck = (message, channel) => {
+        let check = client.clink.get(message.guild.id)
+        if(channel === check) {
+            return true;
+        } else {
+            return false;
+        }
+
+        }
+
 	    client.isOwner = (author) => {
         author = client.users.resolve(author);
         if(!author) return false;
         return (client.config.owners.includes(author.id));
-
     }};

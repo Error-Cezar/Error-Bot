@@ -1,6 +1,7 @@
 module.exports = {
     name: "setconf",
     description: "change bot settings !",
+    aliases: "set",
     execute(message, args) {
         const client = message.client
         message.client.settings.get(message.guild.id);
@@ -8,6 +9,7 @@ module.exports = {
     prefix: "&",
     language: "en",
     modLogChannel: "mod-log",
+    modLog: "on",
     modRole: "Moderator",
     adminRole: "Administrator",
     welcomeChannel: "welcome",
@@ -40,10 +42,17 @@ const guildConf = client.settings.ensure(message.guild.id, defaultSettings);
     }
 
     if(prop == "language") {
-if(!client.lang.includes(value.join(" "))) {
- return message.reply(`This language doesnt exist.\n here is the current languages: \`\`\`${client.lang.join(", ")}\`\`\``)
-}
+      if(!client.lang.includes(value.join(" "))) {
+       return message.reply(`This language doesnt exist.\n here is the current languages: \`\`\`${client.lang.join(", ")}\`\`\``)
+      }
     }
+
+      if(prop == "modLog") {
+        if(!client.log.includes(value.join(" "))) {
+         return message.reply(`This setting doesnt exist.\n here is the current settings: \`\`\`${client.log.join(", ")}\`\`\``)
+        }
+    }
+    
       // Now we can finally change the value. Here we only have strings for values 
     // so we won't bother trying to make sure it's the right type and such. 
     client.settings.set(message.guild.id, value.join(" "), prop);

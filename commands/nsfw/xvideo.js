@@ -1,6 +1,7 @@
 module.exports = {
     name: "xvideo",
     aliases: "xvid",
+    usage: "[string] (aka text)",
     description: "send a video from xvideo.com",
     cooldown: 5,
     async execute(message, args) {
@@ -9,6 +10,7 @@ module.exports = {
         const {
             XVDL
         } = require("xvdl");
+        if(!args[0]) return message.client.sendErrorEmbed(message.channel, "you need to add something to search.")
         const vid = args[0]
         const num = args.slice(vid.length)
         console

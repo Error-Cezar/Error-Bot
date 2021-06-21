@@ -2,18 +2,28 @@ const Discord = require('discord.js');
 require('dotenv').config();
 const Enmap = require('enmap');
 const fs = require("fs");
+const mongoose = require("mongoose");
 
 // Set mobile status
 Discord.Constants.DefaultOptions.ws.properties.$browser = "Discord Android";
 
 // Create client
-const client = new Discord.Client()
+const client = new Discord.Client();
+const disbut = require('discord-buttons')(client);
+
 client.queue = new Map();
+client.clink = new Map();
 client.lang = [
     "en",
     "fr",
 ]
 
+client.log = [
+    "on",
+    "off",
+]
+
+// DataBase setup
 client.settings = new Enmap({
     name: "users",
     fetchAll: true,
@@ -21,6 +31,35 @@ client.settings = new Enmap({
     dataDir: "./db/bot/",
     cloneLevel: 'deep'
 });
+
+client.webDB = new Enmap({
+    name: "users",
+    fetchAll: true,
+    autoFetch: true,
+    dataDir: "./db/servers/",
+    cloneLevel: 'deep'
+});
+
+client.TicketDB = new Enmap({
+    name: "ticket",
+    fetchAll: true,
+    autoFetch: true,
+    dataDir: "./db/ticket/",
+    cloneLevel: 'deep'
+});
+client.def = {
+    channel: "",
+    status: "off",
+    role: "",
+        }
+
+        client.TicketUser = new Enmap({
+            name: "ticket2",
+            fetchAll: true,
+            autoFetch: true,
+            dataDir: "./db/ticket2/",
+            cloneLevel: 'deep'
+        });
 
 const defaultSettings = {
     prefix: "&",
@@ -30,6 +69,12 @@ const defaultSettings = {
     adminRole: "Administrator",
     welcomeChannel: "welcome",
     welcomeMessage: "Say hello to {{user}}, everyone!"
+
+
+}
+
+const defaultDB = {
+    commandsrun: 0
 }
 
 client.slang = "";
@@ -40,6 +85,17 @@ client.on("ready", message => {
         type: 'WATCHING'
     });
 });
+
+// mongoDB connection
+mongoose.connect(process.env.MONGODB_SRV, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+}).then(() => [
+    console.log("connect to mongoDB via mongoose !")
+])
+
+client.db = mongoose.connection;
 
 // Gets all directories in the main folder - Only goes 1 down cannot find subfolders of subfolders
 function getDirectories() {
