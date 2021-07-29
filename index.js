@@ -81,21 +81,32 @@ client.slang = "";
 
 client.on("ready", message => {
     console.log('bot ready !');
-    client.user.setActivity('&help | im pro', {
+    setInterval(function(){ 
+        const stats = [
+            "&help",
+            "error-bot.ga",
+        ]
+        var min = 0;
+        var max = Math.floor(stats.length);
+        var stat = stats[Math.floor(Math.random() * (max - min)) + min]
+    client.user.setActivity(`${stat} | im pro`, {
         type: 'WATCHING'
     });
+}, 1000);
 });
 
 // mongoDB connection
-mongoose.connect(process.env.MONGODB_SRV, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-}).then(() => [
-    console.log("connect to mongoDB via mongoose !")
-])
 
-client.db = mongoose.connection;
+
+//  mongoose.connect(process.env.MONGODB_SRV, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//     useFindAndModify: false,
+// }).then(() => [
+//     console.log("connect to mongoDB via mongoose !")
+// ])
+
+// client.db = mongoose.connection;
 
 // Gets all directories in the main folder - Only goes 1 down cannot find subfolders of subfolders
 function getDirectories() {

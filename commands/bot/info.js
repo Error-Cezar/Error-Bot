@@ -15,7 +15,8 @@ inf.setTitle("Error-Bot info");
 inf.addFields(
     {name: "name", value: client.user.username},
     {name: "id", value: client.user.id},
-    {name: "servers", value: client.guilds.cache.size},
+    {name: "servers", value: client.guilds.cache.size, inline: true},
+    {name: "users", value: client.users.cache.size, inline: true},
     {name: "current database", value: "enmap"},
     {name: "uptime", value: hou + "h " + client.uptime/60000 + "min " + client.uptime/1000 +"s " + client.uptime +"ms"},
 )
